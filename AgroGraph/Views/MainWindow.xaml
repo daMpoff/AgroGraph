@@ -1,0 +1,99 @@
+﻿<Window x:Class="AgroGraph.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AgroGraph.ViewModels"
+        xmlns:lvcw="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        mc:Ignorable="d"
+        Title="Главное окно" Height="800" Width="1200"
+        Style="{StaticResource MaterialDesignWindow}">
+    <Window.DataContext>
+        <vm:MainViewModel></vm:MainViewModel>
+    </Window.DataContext>
+     <Grid>
+        <!-- Определение двух колонок для размещения кнопки и логотипа -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="6*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Кнопка "Прочитать данные" слева -->
+        <Button
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding ReadDataCommand}"
+                Grid.Column="0"
+                Width="140" Height="50"
+                Margin="0">
+            <TextBlock Text="Прочитать данные"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+        </Button>
+        <!-- Вкладки с графиками -->
+        <TabControl Grid.Column="1" Margin="10" TabStripPlacement="Top" Style="{StaticResource MaterialDesignFilledTabControl}">
+            <!-- Вкладка для температуры -->
+            <TabItem Header="Температура">
+                <lvcw:CartesianChart Margin="15" Series="{Binding TemperatureSeries}"
+                                    XAxes="{Binding XAxes}"
+                                    YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для влажности -->
+            <TabItem Header="Влажность">
+                <lvcw:CartesianChart Margin="15" Series="{Binding HumiditySeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для электропроводности -->
+            <TabItem Header="Электропроводность">
+                <lvcw:CartesianChart Margin="15" Series="{Binding ConductivitySeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для кислотности -->
+            <TabItem Header="Кислотность">
+                <lvcw:CartesianChart Margin="15" Series="{Binding AciditySeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для азота -->
+            <TabItem Header="Азот">
+                <lvcw:CartesianChart Margin="15" Series="{Binding NitrogenSeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для фосфора -->
+            <TabItem Header="Фосфор">
+                <lvcw:CartesianChart Margin="15" Series="{Binding PhosphorusSeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для калия -->
+            <TabItem Header="Калий">
+                <lvcw:CartesianChart Margin="15" Series="{Binding PotassiumSeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для солености -->
+            <TabItem Header="Соленость">
+                <lvcw:CartesianChart Margin="15" Series="{Binding SalinitySeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+
+            <!-- Вкладка для общего содержания растворенных веществ -->
+            <TabItem Header="Общее содержание растворенных веществ">
+                <lvcw:CartesianChart Margin="15" Series="{Binding TotalDissolvedSolidsSeries}"
+                                     XAxes="{Binding XAxes}"
+                                     YAxes="{Binding YAxes}" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
