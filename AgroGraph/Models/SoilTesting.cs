@@ -2,10 +2,9 @@ namespace AgroGraph.Models;
 
 public class SoilTesting
 {
-    public SoilTesting(int numberOfTest/*double currentDistanceTraveled*/, double humidity, double temperature, double conductivity, double acidity, double nitrogen, double phosphorus, double potassium, double salinity, double totalDissolvedSolids)
+    public SoilTesting(double timestamp, double humidity, double temperature, double conductivity, double acidity, double nitrogen, double phosphorus, double potassium, double salinity, double totalDissolvedSolids)
     {
-        NumberOfTest = numberOfTest;
-        //CurrentDistanceTraveled = currentDistanceTraveled;
+        Timestamp = timestamp;
         Humidity = humidity;
         Temperature = temperature;
         Conductivity = conductivity;
@@ -17,8 +16,7 @@ public class SoilTesting
         TotalDissolvedSolids = totalDissolvedSolids;
     }
 
-    public int NumberOfTest { get; set; }
-    public double CurrentDistanceTraveled { get; set; }
+    public double Timestamp { get; set; }
     public double Humidity { get; set; }
     public double Temperature { get; set; }
     public double Conductivity { get; set; }

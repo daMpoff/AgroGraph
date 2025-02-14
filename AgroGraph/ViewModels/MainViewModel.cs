@@ -161,7 +161,7 @@ public class MainViewModel : INotifyPropertyChanged
         {
             string jsonData = File.ReadAllText(openFileDialog.FileName);
 
-            var soilTests = JsonConvert.DeserializeObject<Dictionary<string, SoilTesting>>(jsonData);
+            var soilTests = JsonConvert.DeserializeObject<List<SoilTestingData>>(jsonData);
 
             Testings.Clear();
 
@@ -169,25 +169,18 @@ public class MainViewModel : INotifyPropertyChanged
             {
                 foreach (var test in soilTests)
                 {
-                    if (int.TryParse(test.Key, out int numberOfTest))
-                    {
-                        Testings.Add(new SoilTesting(
-                            numberOfTest,
-                            test.Value.Humidity,
-                            test.Value.Temperature,
-                            test.Value.Conductivity,
-                            test.Value.Acidity,
-                            test.Value.Nitrogen,
-                            test.Value.Phosphorus,
-                            test.Value.Potassium,
-                            test.Value.Salinity,
-                            test.Value.TotalDissolvedSolids
-                        ));
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка: " + test.Key);
-                    }
+                    Testings.Add(new SoilTesting(
+                        test.Timestamp,
+                        test.Humi,
+                        test.Temp,
+                        test.Cond,
+                        test.Phph,
+                        test.Nitro,
+                        test.Phos,
+                        test.Pota,
+                        test.Soli,
+                        test.Tds
+                    ));
                 }
 
                 // Инициализация серий данных
@@ -320,7 +313,7 @@ public class MainViewModel : INotifyPropertyChanged
                 // Определение осей X и Y
                 XAxes = new Axis[]
                 {
-                    new Axis { Labels = Testings.Select(t => t.NumberOfTest.ToString()).ToList() }
+                    new Axis { Labels = Testings.Select(t => t.Timestamp / 1000 + " сек").ToList() }
                 };
 
                 YAxes = new Axis[]
